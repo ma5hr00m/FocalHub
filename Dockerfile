@@ -1,19 +1,30 @@
 # 构建阶段
 FROM golang:1.20-alpine AS builder
 
-RUN mkdir /app
 WORKDIR /app
+
+# 复制 go.mod 和 go.sum 文件
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 复制项目文件
 COPY . .
-RUN go mod download && \
-    CGO_ENABLED=0 GOOS=linux go build -o focalhub .
+
+# 构建可执行文件
+RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./cmd
 
 # 运行阶段
 FROM alpine:3.20
 
+# 复制配置文件和可执行文件
 COPY ./config.toml /config.toml
 COPY --from=builder /app/focalhub /usr/local/bin/focalhub
-COPY ./config.toml /config.toml
+
+# 设置可执行权限
 RUN chmod +x /usr/local/bin/focalhub
+
+# 暴露端口
 EXPOSE 2050
 
+# 启动命令
 CMD ["/usr/local/bin/focalhub"]
