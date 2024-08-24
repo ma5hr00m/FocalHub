@@ -10,7 +10,7 @@ RUN go mod download && \
 # 运行阶段
 FROM alpine:3.20
 
-COPY ./conf /conf
+COPY ./config.toml /config.toml
 COPY --from=builder /app/focalhub /usr/local/bin/focalhub
 COPY ./config.toml /config.toml
 RUN chmod +x /usr/local/bin/focalhub
