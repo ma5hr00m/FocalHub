@@ -1,5 +1,6 @@
+# development
 [app]
-port = 80
+port = 2050
 
 [secret]
 session_secret = "WHERuSi6FfVU134g"

@@ -1,1 +1,49 @@
-config.toml
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.coverprofile
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build directories
+bin/
+obj/
+
+# Go workspace
+go.work
+go.work.sum
+
+# Go modules
+vendor/
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
