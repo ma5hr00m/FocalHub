@@ -1,0 +1,37 @@
+name: focalhub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
+      - name: Copy files to server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          sshpass -p $SERVER_PASSWORD rsync -avz --exclude '.git*' --exclude 'node_modules' ./ $SERVER_USER@$SERVER_HOST:/path/to/your/project
+
+      - name: Deploy on server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_HOST << 'EOF'
+            cd /path/to/your/project
+            docker-compose down
+            docker-compose up -d --build
+          EOF

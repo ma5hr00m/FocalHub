@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  focalhub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2060:2060"
+    restart: always
