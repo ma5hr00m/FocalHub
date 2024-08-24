@@ -11,7 +11,7 @@ RUN go mod download
 COPY . .
 
 # 构建可执行文件
-RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./cmd
+RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./
 
 # 运行阶段
 FROM alpine:3.20
