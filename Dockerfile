@@ -1,4 +1,3 @@
-# 构建阶段
 FROM golang:1.20-alpine AS builder
 
 WORKDIR /app
@@ -10,7 +9,15 @@ RUN go mod download
 # 复制项目文件
 COPY . .
 
+# 构建前端项目
+WORKDIR /app/internal/client
+RUN apk add --no-cache nodejs-npm
+RUN npm install -g npm@latest
+RUN npm install
+RUN npm run build
+
 # 构建可执行文件
+WORKDIR /app
 RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./cmd
 
 # 运行阶段
