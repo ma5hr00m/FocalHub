@@ -11,7 +11,8 @@ COPY . .
 
 # 构建前端项目
 WORKDIR /app/internal/client
-RUN apk add --no-cache nodejs-npm
+RUN apk update
+RUN apk add --no-cache nodejs npm
 RUN npm install -g npm@latest
 RUN npm install
 RUN npm run build
