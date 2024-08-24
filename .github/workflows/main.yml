@@ -1,4 +1,4 @@
-name: focalhub
+name: CI
 
 on:
   push:
@@ -6,32 +6,38 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Install sshpass
-        run: sudo apt-get install sshpass
-
-      - name: Copy files to server
-        env:
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+      - name: Build Docker image
         run: |
-          sshpass -p $SERVER_PASSWORD rsync -avz --exclude '.git*' --exclude 'node_modules' ./ $SERVER_USER@$SERVER_HOST:/path/to/your/project
+          docker build -t username/focalhub:${{ github.sha }} .
+          docker tag username/focalhub:${{ github.sha }} username/focalhub:latest
 
-      - name: Deploy on server
-        env:
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_EMAIL }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Push Docker image to Docker Hub
         run: |
-          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_HOST << 'EOF'
-            cd /path/to/your/project
-            docker-compose down
-            docker-compose up -d --build
-          EOF
+          docker push username/focalhub:latest
+          docker push username/focalhub:${{ github.sha }}
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            docker pull username/focalhub:${{ github.sha }}
+            docker stop focalhub || true  
+            docker rm focalhub || true   
+            docker run -d --name focalhub -p 2050:2050 username/focalhub:${{ github.sha }}
