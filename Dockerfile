@@ -10,9 +10,10 @@ RUN go mod download
 COPY . .
 
 # 构建前端项目
-WORKDIR /app/client  # 修改为正确的工作目录
+WORKDIR /app/client
 RUN apk update
 RUN apk add --no-cache nodejs npm
+RUN ls
 RUN npm install -g npm@latest
 RUN npm install
 RUN npm run build
