@@ -37,9 +37,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            export http_proxy="http://localhost:20171"  
-            export https_proxy="http://localhost:20171"
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }}
             docker stop focalhub || true  
             docker rm focalhub || true   
-            docker run -d --name focalhub -p 2050:2050 ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }}
+            docker run -d --name focalhub -p 0.0.0.0:2050:2050 ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }}
