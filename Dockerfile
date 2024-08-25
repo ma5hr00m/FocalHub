@@ -1,4 +1,6 @@
 FROM golang:1.22-alpine AS builder
+
+RUN mkdir /app
 WORKDIR /app
 # 复制 go.mod 和 go.sum 文件
 COPY go.mod go.sum ./
