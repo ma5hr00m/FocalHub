@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine AS builder
+FROM golang:1.22-alpine AS builder 
 
 WORKDIR /app
 
@@ -13,7 +13,6 @@ COPY . .
 WORKDIR /app/client
 RUN apk update
 RUN apk add --no-cache nodejs npm
-RUN ls
 RUN npm install -g npm@latest
 RUN npm install
 RUN npm run build
