@@ -2,7 +2,7 @@ package routes
 
 import (
 	"fmt"
-	"focalhub/internal/client"
+	"focalhub/client"
 	"focalhub/internal/config"
 	"io/fs"
 	"log"
@@ -19,7 +19,7 @@ func Run() {
 	if err != nil {
 		log.Fatal("Failed to sub path `dist`: %v", err)
 	}
-	r.StaticFS("/m", http.FS(fe))
+	r.StaticFS("/c", http.FS(fe))
 
 	// server
 	r.GET("/ping", func(c *gin.Context) {
