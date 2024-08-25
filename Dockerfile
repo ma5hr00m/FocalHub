@@ -8,15 +8,16 @@ COPY . .
 
 # 构建前端项目
 WORKDIR /app/client
-RUN apk add --no-cache nodejs-npm
 RUN apk update
 RUN apk add --no-cache nodejs npm
 RUN npm install -g npm@latest
 RUN npm install
 RUN npm run build
+
 # 构建可执行文件
 WORKDIR /app
 RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./cmd
+
 # 运行阶段
 FROM alpine:3.20
 # 复制配置文件和可执行文件
