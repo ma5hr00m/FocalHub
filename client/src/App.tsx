@@ -2,13 +2,13 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { configAtom } from './jotai/jotai';
 import AppRoutes from './routes/AppRoutes';
-// import HeadHelmet from './components/Helmet';
+import HeadHelmet from './components/Helmet';
 
 // import useUpdateFrequency from '@utils/useUpdateFrequency';
 
 const App: React.FC = ({}) => {
   const [config] = useAtom(configAtom);
-  console.log(config);
+  // console.log(config);
 
   // const [count, ] = useState(0);
   // useUpdateFrequency(count);
@@ -19,7 +19,8 @@ const App: React.FC = ({}) => {
 
   return (
     <>
-      {/* <HeadHelmet config={config.site} /> */}
+      <HeadHelmet config={config.site} />
+      <h1>Focal Hub</h1>
       <AppRoutes />
     </>
   );

@@ -11,19 +11,14 @@ COPY . .
 # 构建前端项目
 WORKDIR /app/client
 RUN apk update
-
-# 安装 Node.js 20.17.0
-RUN apk add --no-cache curl && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apk add --no-cache nodejs=20.17.0-r0 npm
-
+RUN apk add --no-cache nodejs npm
 RUN npm install -g npm@latest
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
 # 构建可执行文件
 WORKDIR /app
-RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./cmd
+RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./
 
 # 运行阶段
 FROM alpine:3.20

@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Home from '@pages/Home';
-import Gallery from '@pages/Gallery';
+import Home from '../pages/Home';
+import Gallery from '../pages/Gallery';
 
 interface AppRoutesProps {}
 
 const AppRoutes: React.FC<AppRoutesProps> = ({}) => {
   return (
     <>
+      <h2>Focal Hub Routes</h2>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
