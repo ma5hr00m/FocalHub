@@ -17,7 +17,7 @@ func Run() {
 	//client
 	fe, err := fs.Sub(client.FS, "dist")
 	if err != nil {
-		log.Fatal("Failed to sub path `dist`: %v", err)
+		log.Fatalf("Failed to sub path `dist`: %v", err)
 	}
 	r.StaticFS("/c", http.FS(fe))
 
