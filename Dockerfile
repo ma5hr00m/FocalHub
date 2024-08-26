@@ -11,23 +11,9 @@ COPY . .
 # 构建前端项目
 WORKDIR /app/client
 RUN apk update
-
-# 安装 curl 和其他依赖
-RUN apk add --no-cache curl
-
-# 安装 Node.js 20.17.0
-RUN curl -fsSL https://unofficial-builds.nodejs.org/download/release/v20.17.0/node-v20.17.0-linux-x64-musl.tar.xz | tar -xJ -C /usr/local --strip-components=1
-
-# 添加 Node.js 到 PATH
-ENV PATH="/usr/local/bin:$PATH"
-
-# 验证 Node.js 和 npm 版本
-RUN node -v && npm -v
-
-# 安装项目依赖
+RUN apk add --no-cache nodejs npm
 RUN npm install -g npm@latest
-RUN npm cache clean --force
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm run build
 
 # 构建可执行文件
