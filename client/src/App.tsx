@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { configAtom } from './jotai/jotai';
 import AppRoutes from './routes/AppRoutes';
-import HeadHelmet from './components/Helmet';
+// import HeadHelmet from './components/Helmet';
 
 // import useUpdateFrequency from '@utils/useUpdateFrequency';
 
@@ -19,7 +19,7 @@ const App: React.FC = ({}) => {
 
   return (
     <>
-      <HeadHelmet config={config.site} />
+      {/* <HeadHelmet config={config.site} /> */}
       <AppRoutes />
     </>
   );
