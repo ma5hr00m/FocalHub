@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
 import { configAtom } from './jotai/jotai';
 import AppRoutes from './routes/AppRoutes';
