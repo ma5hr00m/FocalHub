@@ -18,6 +18,9 @@ RUN apk add --no-cache curl
 # 安装 Node.js 20.17.0
 RUN curl -fsSL https://unofficial-builds.nodejs.org/download/release/v20.17.0/node-v20.17.0-linux-x64-musl.tar.xz | tar -xJ -C /usr/local --strip-components=1
 
+# 添加 Node.js 到 PATH
+ENV PATH="/usr/local/bin:$PATH"
+
 # 验证 Node.js 和 npm 版本
 RUN node -v && npm -v
 
