@@ -43,7 +43,7 @@ func main() {
 	})
 
 	// Server endpoint
-	r.GET("/ping", func(c *gin.Context) {
+	r.GET("/api/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Hello, world!",
 		})
