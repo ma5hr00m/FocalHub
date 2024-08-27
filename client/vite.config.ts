@@ -32,7 +32,7 @@ export default defineConfig({
   // 允许本地访问方便远程开发
   server: {
     host: true,
-    port: 2060,
+    port: 5173,
     strictPort: true,
   },
   resolve: {

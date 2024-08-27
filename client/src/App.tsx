@@ -20,7 +20,6 @@ const App: React.FC = ({}) => {
   return (
     <>
       <HeadHelmet config={config.site} />
-      <h1>Focal Hub</h1>
       <AppRoutes />
     </>
   );
