@@ -68,9 +68,9 @@ func ListBlogPosts(docsDir string) ([]BlogPostSummary, error) {
 
 	// 按照日期排序
 	sort.Slice(summaries, func(i, j int) bool {
-		dateI, _ := time.Parse("2006-01-02", summaries[i].Date) // 解析日期字符串
-		dateJ, _ := time.Parse("2006-01-02", summaries[j].Date) // 解析日期字符串
-		return dateI.Before(dateJ)                              // 比较日期
+		dateI, _ := time.Parse("2006-01-02", summaries[i].Date)
+		dateJ, _ := time.Parse("2006-01-02", summaries[j].Date)
+		return dateI.After(dateJ)
 	})
 
 	return summaries, nil

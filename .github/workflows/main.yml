@@ -41,3 +41,4 @@ jobs:
             docker stop focalhub || true  
             docker rm focalhub || true   
             docker run -d --name focalhub -p 2050:2050 ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }}
+            sudo sysctl -w net.ipv4.ip_forward=1

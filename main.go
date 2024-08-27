@@ -31,8 +31,9 @@ func main() {
 
 	// 服务器端点
 	api := r.Group("/api")
+	api.GET("/ping", ping.GetPing)
+
 	v1 := api.Group("/v1")
-	v1.GET("/ping", ping.GetPing)
 	v1.GET("/blogs", blog.GetBlogs)
 	v1.GET("/blog/:slug", blog.GetBlog)
 
