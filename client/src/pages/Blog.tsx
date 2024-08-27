@@ -13,18 +13,18 @@ const Blog: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [loading, setLoading] = useState(true);
-    console.log(`blog [${slug}]`)
+    const [error, setError] = useState<string | null>(null); // 添加错误状态
 
     useEffect(() => {
-        fetch(`http://localhost:2060/api/blog/${slug}`)
-            .then(response => {
+        const fetchPost = async () => {
+            setLoading(true);
+            setError(null); // 重置错误状态
+            try {
+                const response = await fetch(`/api/blog/${slug}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
+                const data = await response.json();
                 // 将 API 返回的数据转换为 BlogPost 类型
                 const blogPost: BlogPost = {
                     title: data.Title,
@@ -32,16 +32,23 @@ const Blog: React.FC = () => {
                     content: data.Content,
                 };
                 setPost(blogPost);
-                setLoading(false);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching blog post:', error);
+                setError('Failed to load the blog post. Please try again later.'); // 设置错误信息
+            } finally {
                 setLoading(false);
-            });
+            }
+        };
+
+        fetchPost();
     }, [slug]);
 
     if (loading) {
         return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>; // 显示错误信息
     }
 
     if (!post) {
@@ -50,8 +57,7 @@ const Blog: React.FC = () => {
 
     return (
         <div>
-            <p>Blog</p>
-            <span>{post.title}</span>
+            <h1>{post.title}</h1>
             <p>{post.date}</p>
             <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
