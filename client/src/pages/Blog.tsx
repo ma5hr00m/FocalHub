@@ -20,7 +20,7 @@ const Blog: React.FC = () => {
             setLoading(true);
             setError(null); // 重置错误状态
             try {
-                const response = await fetch(`/api/blog/${slug}`);
+                const response = await fetch(`/api/v1/blog/${slug}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

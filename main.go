@@ -4,10 +4,9 @@ import (
 	"embed"
 	"fmt"
 	"focalhub/internal/config"
-	"focalhub/internal/controllers/blog"
+	"focalhub/internal/controllers/ping"
+	"focalhub/internal/controllers/v1/blog"
 	"mime"
-	"net/http"
-	"path/filepath"
 	"strings"
 
 	"github.com/gin-contrib/cors"
@@ -30,10 +29,15 @@ func main() {
 		MaxAge:           12 * 3600,
 	}))
 
+	// 服务器端点
+	api := r.Group("/api")
+	v1 := api.Group("/v1")
+	v1.GET("/ping", ping.GetPing)
+	v1.GET("/blogs", blog.GetBlogs)
+	v1.GET("/blog/:slug", blog.GetBlog)
+
 	// 处理静态文件服务
-	// 当 API 不存在时，返回静态文件
 	r.NoRoute(func(c *gin.Context) {
-		// 获取请求路径
 		path := c.Request.URL.Path
 		s := strings.Split(path, ".")
 		prefix := "client/dist"
@@ -46,29 +50,8 @@ func main() {
 				c.Data(200, mime.TypeByExtension(".html"), data)
 			}
 		} else {
-			// 如果文件存在，根据文件扩展名设置正确的 MIME 类型并返回文件内容
 			c.Data(200, mime.TypeByExtension(fmt.Sprintf(".%s", s[len(s)-1])), data)
 		}
-	})
-
-	// 服务器端点
-	r.GET("/api/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong!",
-		})
-	})
-
-	r.GET("/api/blog/:slug", func(c *gin.Context) {
-		slug := c.Param("slug")
-		filename := filepath.Join("docs", slug+".md")
-
-		post, err := blog.ReadMarkdownFile(filename)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		c.JSON(http.StatusOK, post)
 	})
 
 	// 启动服务器
