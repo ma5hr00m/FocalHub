@@ -28,7 +28,7 @@ const alias = {
 export default defineConfig({
   plugins,
   // go embed 需要使用相对路径
-  base: './',
+  // base: './',
   // 允许本地访问方便远程开发
   server: {
     host: true,

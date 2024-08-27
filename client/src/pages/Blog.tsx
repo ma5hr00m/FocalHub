@@ -13,9 +13,10 @@ const Blog: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [loading, setLoading] = useState(true);
+    console.log(`blog [${slug}]`)
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:2060/api/blog/${slug}`)
+        fetch(`http://localhost:2060/api/blog/${slug}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -23,7 +24,7 @@ const Blog: React.FC = () => {
                 return response.json();
             })
             .then(data => {
-                // console.log(data);
+                console.log(data);
                 // 将 API 返回的数据转换为 BlogPost 类型
                 const blogPost: BlogPost = {
                     title: data.Title,
