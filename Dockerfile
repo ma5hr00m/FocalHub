@@ -28,6 +28,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./main.go  # 更新此行
 FROM alpine:3.20
 # 复制配置文件和可执行文件
 COPY ./config.toml /config.toml
+COPY ./docs /docs
 COPY --from=builder /app/focalhub /usr/local/bin/focalhub
 # 设置可执行权限
 RUN chmod +x /usr/local/bin/focalhub
