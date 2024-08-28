@@ -1,5 +1,14 @@
-# 使用 Golang 1.22 的 Alpine 作为构建阶段的基础镜像
-FROM golang:1.22-alpine AS builder
+# 前端构建阶段
+FROM node:20-alpine AS frontend-builder
+
+WORKDIR /app/client
+COPY ./client/package*.json ./
+RUN npm install --legacy-peer-deps
+COPY ./client ./
+RUN npm run build
+
+# 后端构建阶段
+FROM golang:1.22-alpine AS backend-builder
 
 # 创建应用程序目录
 RUN mkdir /app
@@ -11,25 +20,16 @@ RUN go mod download
 
 COPY . .
 
-# 构建前端项目
-WORKDIR /app/client
-RUN apk update
-RUN apk add --no-cache nodejs npm
-RUN npm install -g npm@latest
-RUN npm install --legacy-peer-deps
-RUN npm run build
-
 # 构建可执行文件
 WORKDIR /app
-# 设置环境变量，构建 Linux 可执行文件
-RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./main.go  # 更新此行
+RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./main.go
 
 # 运行阶段
 FROM alpine:3.20
-# 复制配置文件和可执行文件
 COPY ./config.toml /config.toml
 COPY ./docs /docs
-COPY --from=builder /app/focalhub /usr/local/bin/focalhub
+COPY --from=backend-builder /app/focalhub /usr/local/bin/focalhub
+COPY --from=frontend-builder /app/client/dist /usr/local/share/focalhub/dist
 
 # 设置环境变量
 ARG ACCESS_KEY_ID
