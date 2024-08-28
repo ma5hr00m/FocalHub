@@ -28,6 +28,13 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./main.go
 
 # 运行阶段
 FROM alpine:3.20
+
+# 安装时区数据
+RUN apk add --no-cache tzdata
+
+# 设置时区为中国上海
+ENV TZ=Asia/Shanghai
+
 COPY ./config.toml /config.toml
 COPY ./docs /docs
 COPY --from=backend-builder /app/focalhub /usr/local/bin/focalhub
@@ -49,7 +56,9 @@ ENV APP_PORT=${APP_PORT}
 
 # 设置可执行权限
 RUN chmod +x /usr/local/bin/focalhub
+
 # 暴露端口
 EXPOSE 2050
+
 # 启动命令
 CMD ["/usr/local/bin/focalhub"]
