@@ -5,15 +5,15 @@ import Navbar from '@/components/NavBar';
 
 import Home from '../pages/Home';
 import Gallery from '../pages/Gallery';
-import Blog from '../pages/Blog';
-import Blogs from '../pages/Blogs';
+import Article from '../pages/Article';
+import Articles from '../pages/Articles';
 
 interface AppRoutesProps {}
 
 const AppRoutes: React.FC<AppRoutesProps> = ({}) => {
   const navItems = [
     { path: '/', label: 'Home' },
-    { path: '/blogs', label: 'Blogs' },
+    { path: '/articles', label: 'Articles' },
     { path: '/gallery', label: 'Gallery' },
   ];
   
@@ -24,8 +24,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({}) => {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/gallery' element={<Gallery/>}></Route>
-          <Route path='/blog/:slug' element={<Blog />}></Route>
-          <Route path='/blogs' element={<Blogs />}></Route>
+          <Route path='/article/:slug' element={<Article />}></Route>
+          <Route path='/articles' element={<Articles />}></Route>
         </Routes>
       </BrowserRouter>
     </>

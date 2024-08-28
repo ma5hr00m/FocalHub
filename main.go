@@ -4,7 +4,7 @@ import (
 	"embed"
 	"fmt"
 	"focalhub/internal/controllers/ping"
-	"focalhub/internal/controllers/v1/blog"
+	"focalhub/internal/controllers/v1/article"
 	"focalhub/internal/controllers/v1/github"
 	aliyunoss "focalhub/internal/controllers/v1/oss"
 	"focalhub/internal/utils"
@@ -60,9 +60,10 @@ func main() {
 	api.GET("/ping", ping.GetPing)
 
 	v1 := api.Group("/v1")
-	v1.GET("/blogs", blog.GetBlogs)
-	v1.GET("/blog/:slug", blog.GetBlog)
+	v1.GET("/articles", article.GetArticles)
+	v1.GET("/article/:slug", article.GetArticle)
 	v1.GET("/oss/tree", aliyunoss.GetFileTree)
+	v1.GET("/oss/filelist", aliyunoss.GetFileList)
 	v1.GET("/repo/:owner/:repo/last-updated", github.GetLastUpdated(githubClient))
 
 	// 处理静态文件服务

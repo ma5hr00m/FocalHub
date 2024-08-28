@@ -1,6 +1,6 @@
 ---
-title: "Hello, FocalHub!"
+title: "你好，世界！"
 date: "2024-08-27"
 ---
 
-Hello, FocalHub!
+你好，Focal Hub！这里是一段中文测试文档。

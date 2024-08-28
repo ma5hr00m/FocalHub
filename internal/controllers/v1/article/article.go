@@ -1,4 +1,4 @@
-package blog
+package article
 
 import (
 	"net/http"
@@ -9,9 +9,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetBlogs 处理获取博客列表请求
-func GetBlogs(c *gin.Context) {
-	summaries, err := utils.ListBlogPosts("docs")
+// GetArticles 处理获取博客列表请求
+func GetArticles(c *gin.Context) {
+	summaries, err := utils.ListArticlePosts("docs")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -19,8 +19,8 @@ func GetBlogs(c *gin.Context) {
 	c.JSON(http.StatusOK, summaries)
 }
 
-// GetBlog 处理获取单个博客文章请求
-func GetBlog(c *gin.Context) {
+// GetArticle 处理获取单个博客文章请求
+func GetArticle(c *gin.Context) {
 	slug := c.Param("slug")
 	filename := filepath.Join("docs", slug+".md")
 
