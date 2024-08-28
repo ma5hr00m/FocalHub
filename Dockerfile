@@ -20,8 +20,10 @@ RUN go mod download
 
 COPY . .
 
+# 确保前端构建的输出目录存在
+COPY --from=frontend-builder /app/client/dist /app/client/dist
+
 # 构建可执行文件
-WORKDIR /app
 RUN CGO_ENABLED=0 GOOS=linux go build -o focalhub ./main.go
 
 # 运行阶段
@@ -29,7 +31,6 @@ FROM alpine:3.20
 COPY ./config.toml /config.toml
 COPY ./docs /docs
 COPY --from=backend-builder /app/focalhub /usr/local/bin/focalhub
-COPY --from=frontend-builder /app/client/dist /usr/local/share/focalhub/dist
 
 # 设置环境变量
 ARG ACCESS_KEY_ID
