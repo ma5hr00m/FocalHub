@@ -3,9 +3,9 @@ package main
 import (
 	"embed"
 	"fmt"
-	"focalhub/internal/config"
 	"focalhub/internal/controllers/ping"
 	"focalhub/internal/controllers/v1/blog"
+	"focalhub/internal/controllers/v1/github"
 	aliyunoss "focalhub/internal/controllers/v1/oss"
 	"focalhub/internal/utils"
 	"log"
@@ -27,19 +27,27 @@ func main() {
 		log.Println("No .env file found, using default environment variables")
 	}
 
-	// 从环境变量中读取 OSS 配置信息
+	// 从环境变量中读取配置信息
 	accessKeyId := os.Getenv("ACCESS_KEY_ID")
 	accessKeySecret := os.Getenv("ACCESS_KEY_SECRET")
 	endpoint := os.Getenv("ENDPOINT")
 	bucketName := os.Getenv("BUCKET_NAME")
+	oauthGithubToken := os.Getenv("OAUTH_GITHUB_TOKEN")
+	appPort := os.Getenv("APP_PORT")
 
 	// 检查环境变量是否设置
-	if accessKeyId == "" || accessKeySecret == "" || endpoint == "" || bucketName == "" {
+	if accessKeyId == "" || accessKeySecret == "" || endpoint == "" || bucketName == "" || oauthGithubToken == "" {
 		log.Fatal("One or more environment variables are not set")
 	}
 
 	if err := utils.InitializeOSSClient(accessKeyId, accessKeySecret, endpoint, bucketName); err != nil {
 		log.Fatalf("Failed to initialize OSS client: %v", err)
+	}
+
+	// 初始化 GitHub 客户端
+	githubClient, err := utils.InitializeGitHubClient(oauthGithubToken)
+	if err != nil {
+		log.Fatalf("Failed to initialize GitHub client: %v", err)
 	}
 
 	r := gin.Default()
@@ -62,6 +70,7 @@ func main() {
 	v1.GET("/blogs", blog.GetBlogs)
 	v1.GET("/blog/:slug", blog.GetBlog)
 	v1.GET("/oss/tree", aliyunoss.GetFileTree)
+	v1.GET("/repo/:owner/:repo/last-updated", github.GetLastUpdated(githubClient))
 
 	// 处理静态文件服务
 	r.NoRoute(func(c *gin.Context) {
@@ -81,9 +90,12 @@ func main() {
 		}
 	})
 
-	// 启动服务器
-	port := config.Conf.App.Port
-	err := r.Run(fmt.Sprintf(":%d", port))
+	// 默认端口
+	if appPort == "" {
+		appPort = "8080"
+	}
+
+	err = r.Run(fmt.Sprintf(":%s", appPort))
 	if err != nil {
 		panic(fmt.Errorf("start server failed: %s", err))
 	}

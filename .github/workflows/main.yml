@@ -20,6 +20,8 @@ jobs:
             --build-arg ACCESS_KEY_SECRET=${{ secrets.OSS_ACCESS_KEY_SECRET }} \
             --build-arg ENDPOINT=${{ secrets.OSS_ENDPOINT }} \
             --build-arg BUCKET_NAME=${{ secrets.OSS_BUCKET_NAME }} \
+            --build-arg OAUTH_GITHUB_TOKEN=${{ secrets.OAUTH_GITHUB_TOKEN }} \
+            --build-arg APP_PORT=${{ secrets.APP_PORT }} \
             -t ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }} .
 
           docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:latest
