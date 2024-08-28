@@ -30,6 +30,18 @@ FROM alpine:3.20
 COPY ./config.toml /config.toml
 COPY ./docs /docs
 COPY --from=builder /app/focalhub /usr/local/bin/focalhub
+
+# 设置环境变量
+ARG ACCESS_KEY_ID
+ARG ACCESS_KEY_SECRET
+ARG ENDPOINT
+ARG BUCKET_NAME
+
+ENV ACCESS_KEY_ID=${ACCESS_KEY_ID}
+ENV ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET}
+ENV ENDPOINT=${ENDPOINT}
+ENV BUCKET_NAME=${BUCKET_NAME}
+
 # 设置可执行权限
 RUN chmod +x /usr/local/bin/focalhub
 # 暴露端口

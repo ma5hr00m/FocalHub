@@ -6,17 +6,42 @@ import (
 	"focalhub/internal/config"
 	"focalhub/internal/controllers/ping"
 	"focalhub/internal/controllers/v1/blog"
+	aliyunoss "focalhub/internal/controllers/v1/oss"
+	"focalhub/internal/utils"
+	"log"
 	"mime"
+	"os"
 	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 //go:embed client/dist
 var FS embed.FS
 
 func main() {
+	// 加载 .env 文件
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using default environment variables")
+	}
+
+	// 从环境变量中读取 OSS 配置信息
+	accessKeyId := os.Getenv("ACCESS_KEY_ID")
+	accessKeySecret := os.Getenv("ACCESS_KEY_SECRET")
+	endpoint := os.Getenv("ENDPOINT")
+	bucketName := os.Getenv("BUCKET_NAME")
+
+	// 检查环境变量是否设置
+	if accessKeyId == "" || accessKeySecret == "" || endpoint == "" || bucketName == "" {
+		log.Fatal("One or more environment variables are not set")
+	}
+
+	if err := utils.InitializeOSSClient(accessKeyId, accessKeySecret, endpoint, bucketName); err != nil {
+		log.Fatalf("Failed to initialize OSS client: %v", err)
+	}
+
 	r := gin.Default()
 
 	// CORS 中间件
@@ -36,6 +61,7 @@ func main() {
 	v1 := api.Group("/v1")
 	v1.GET("/blogs", blog.GetBlogs)
 	v1.GET("/blog/:slug", blog.GetBlog)
+	v1.GET("/oss/tree", aliyunoss.GetFileTree)
 
 	// 处理静态文件服务
 	r.NoRoute(func(c *gin.Context) {

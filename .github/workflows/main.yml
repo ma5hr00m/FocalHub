@@ -15,7 +15,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }} .
+          docker build \
+            --build-arg ACCESS_KEY_ID=${{ secrets.OSS_ACCESS_KEY_ID }} \
+            --build-arg ACCESS_KEY_SECRET=${{ secrets.OSS_ACCESS_KEY_SECRET }} \
+            --build-arg ENDPOINT=${{ secrets.OSS_ENDPOINT }} \
+            --build-arg BUCKET_NAME=${{ secrets.OSS_BUCKET_NAME }} \
+            -t ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }} .
+
           docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/focalhub:latest
 
       - name: Login to Docker Hub
