@@ -34,6 +34,14 @@ export default defineConfig({
     host: true,
     port: 5173,
     strictPort: true,
+    // 开发模式下自动重定向到后端开发环境端口
+    proxy: {
+      '/api': {
+        target: 'http://localhost:2060',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'), // 可选：根据需要重写路径
+      },
+    },
   },
   resolve: {
     alias,

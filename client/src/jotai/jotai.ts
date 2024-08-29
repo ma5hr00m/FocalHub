@@ -11,3 +11,4 @@ const configData = yaml.load(process.env.CONFIG || '{}') as Config;
 
 // 定义全局配置的 atom
 export const configAtom = atom<Config | null>(configData);
+export const animationStageAtom = atom("open");

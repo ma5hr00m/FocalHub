@@ -46,3 +46,17 @@ logs
 
 # Windows
 Thumbs.db
+
+# Python Virtual Environments
+.venv/
+venv/
+.env/
+env/
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Pytest cache
+.cache/
+pytest_cache/

@@ -1,0 +1,217 @@
+// 为什么这么多注释?因为感觉写的时候很容易迷^ :P
+
+$butterfly: (
+  // left top
+  ( 0.0em, 5.0em, 12.5em, 7.7em, #127FE3, polygon(0 0, 100.00% 100.00%, 12.80% 74.03%) ),
+  ( 2.5em, 0.0em, 10.0em, 12.7em, #17F9DA, polygon(0 0, 100.00% 100.00%, 0 65.35%) ),
+  // left bottom
+  ( 6.3em, 12.7em, 6.2em, 7.3em, #127FE3, polygon(1.61% 45.21%, 100.00% 0, 0 100.00%) ),
+  ( 4.5em, 12.7em, 8.0em, 5.5em, #17F9DA, polygon(16.25% 20.00%, 100.00% 0, 0 100.00%) ),
+  // right top
+  ( 12.5em, 5.0em, 12.5em, 7.7em, #127FE3, polygon(100.00% 0, 0 100.00%, 87.20% 74.03%) ),
+  ( 12.5em, 0.0em, 10.0em, 12.7em, #17F9DA, polygon(100.00% 0, 0 100.00%, 100.00% 65.35%) ),
+  // right bottom
+  ( 12.5em, 12.7em, 6.2em, 7.3em, #127FE3, polygon(100.00% 45.21%, 0 0, 100.00% 100.00%) ),
+  ( 12.5em, 12.7em, 8.0em, 5.5em, #17F9DA, polygon(83.75% 20.00%, 0 0, 100.00% 100.00%) ),
+);
+
+// 绝对定位居中
+@mixin absoluteCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 设置 butterfly 图形
+@mixin shape {
+  @for $i from 1 through length($butterfly) {
+    $item: nth($butterfly, $i);
+    span:nth-of-type(#{$i}) {
+      width: nth($item, 3);
+      height: nth($item, 4);
+      background: nth($item, 5);
+      clip-path: nth($item, 6);
+    }
+  }
+}
+
+// 聚合形态排序
+@mixin compose {
+  @for $i from 1 through length($butterfly) {
+    $item: nth($butterfly, $i);
+    span:nth-of-type(#{$i}) {
+      position: absolute;
+      left: nth($item, 1);
+      top: nth($item, 2);
+    }
+  }
+}
+
+// 定义变量
+$animation-duration: 1.5s;
+$animation-delay: 0.25s;
+$rotate-angle-top: -8deg;
+$rotate-angle-bottom: 8deg;
+
+@mixin rotateAnimation {
+  // 左上角的两个 span，旋转中心为右下角
+  &:nth-of-type(1), 
+  &:nth-of-type(2) {
+    animation: rotateCenterBottom $animation-duration infinite alternate;
+    transform-origin: 100% 100%;
+  }
+
+  // 左下角的两个 span，旋转中心为右上角
+  &:nth-of-type(3), 
+  &:nth-of-type(4) {
+    animation: rotateCenterTop $animation-duration infinite alternate;
+    transform-origin: 100% 0;
+  }
+
+  // 右上角的两个 span，旋转中心为左下角
+  &:nth-of-type(5), 
+  &:nth-of-type(6) {
+    animation: rotateCenterTop $animation-duration infinite alternate;
+    transform-origin: 0 100%;
+  }
+
+  // 右下角的两个 span，旋转中心为左上角
+  &:nth-of-type(7), 
+  &:nth-of-type(8) {
+    animation: rotateCenterBottom $animation-duration infinite alternate;
+    transform-origin: 0 0;
+  }
+
+  // 设置延迟
+  &:nth-of-type(1), 
+  &:nth-of-type(3), 
+  &:nth-of-type(5), 
+  &:nth-of-type(7) {
+    animation-delay: $animation-delay;
+  }
+}
+
+@keyframes rotateCenterTop {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate($rotate-angle-top);
+  }
+}
+
+@keyframes rotateCenterBottom {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate($rotate-angle-bottom);
+  }
+}
+
+// -------------------------------------------------------------
+
+// 设置通用图形
+@mixin anime-shape {
+  @for $i from 1 through length($butterfly) {
+    $item: nth($butterfly, $i);
+    span:nth-of-type(#{$i}) {
+      width: 10em;
+      height: 10em;
+      background: #aaa;
+    }
+  }
+}
+
+@mixin composeRemove {
+  @for $i from 1 through length($butterfly) {
+    & ~ span:nth-of-type(#{$i}) {
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+  }  
+}
+
+
+
+
+
+
+
+
+@mixin fixed-center {
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+@mixin fixed-right-top {
+  top: 2.5vh;
+  right: 2.5vh;
+}
+
+@keyframes move-to-top-right-wrapper {
+  0%, 90% {
+    @include fixed-center;
+  }
+  100% {
+    @include fixed-right-top;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+$wrapper-font-size: .5vh;
+
+.wrapper {
+  z-index: 100;
+  font-size: $wrapper-font-size;
+  width: calc(25 * $wrapper-font-size);
+  height: calc(20 * $wrapper-font-size);
+  // transition: all 1s;
+  
+  position: fixed;
+  display: flex;
+  // background-color: red;
+
+  @include fixed-right-top;
+  opacity: 0;
+  animation: fade-in 1s forwards;
+  animation-delay: 8s;
+
+  .butterfly {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    display: flex;
+    pointer-events: none;
+
+    // 直接在这里调用 shape 和 compose mixins
+    @include shape;
+    @include compose;
+
+    // @include composeRemove;
+    // @include anime-shape;
+
+    span {
+      // 应用转动动画
+      @include rotateAnimation;
+    }
+  }
+
+  button {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+  }
+}
