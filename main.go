@@ -7,6 +7,7 @@ import (
 	"focalhub/internal/controllers/v1/article"
 	"focalhub/internal/controllers/v1/github"
 	aliyunoss "focalhub/internal/controllers/v1/oss"
+	"focalhub/internal/middlewares/logger"
 	"focalhub/internal/utils"
 	"log"
 	"mime"
@@ -57,6 +58,10 @@ func main() {
 
 	// 服务器端点
 	api := r.Group("/api")
+
+	// 为后端 API 设置 logger 中间件
+	api.Use(logger.LoggerMiddleware("focalhub"))
+
 	api.GET("/ping", ping.GetPing)
 
 	v1 := api.Group("/v1")
