@@ -134,13 +134,6 @@ $rotate-angle-bottom: 8deg;
   }  
 }
 
-
-
-
-
-
-
-
 @mixin fixed-center {
   top: 50%;
   right: 50%;
@@ -148,8 +141,8 @@ $rotate-angle-bottom: 8deg;
 }
 
 @mixin fixed-right-top {
-  top: 2.5vh;
-  right: 2.5vh;
+  top: 3vh;
+  right: 3vh;
 }
 
 @keyframes move-to-top-right-wrapper {
@@ -185,8 +178,8 @@ $wrapper-font-size: .5vh;
 
   @include fixed-right-top;
   opacity: 0;
-  animation: fade-in 1s forwards;
-  animation-delay: 8s;
+  animation: fade-in 2s forwards;
+  animation-delay: 3s;
 
   .butterfly {
     position: absolute;

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { animationStageAtom } from '@/jotai/jotai';
-import Navbar from '@/components/NavBar';
+import Navbar from '@/components/Function/NavBar/index';
 import Home from '@/pages/Home';
 import Gallery from '@/pages/Gallery';
 import Article from '@/pages/Article';
@@ -28,7 +28,7 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
       case "end":
         return (
           <div id='focalhub-app'>
-            <Navbar items={navItems} />
+            {/* <Navbar items={navItems} /> */}
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/gallery' element={<Gallery />} />
