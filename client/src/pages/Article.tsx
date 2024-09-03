@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaFileWord, FaClock } from "react-icons/fa6";
 
 import '@/styles/markdown.scss';
 
-// 定义 ArticlePost 类型
+const CodeBlock = lazy(() => import('@/components/Function/CodeBlock'));
+
 interface ArticlePost {
   title: string;
   date: string;
@@ -76,8 +78,30 @@ const Article: React.FC = () => {
             </span>
           </div>
         </div>
-        <div className='pt6'>
-          <ReactMarkdown className='markdown-body'>{post.content}</ReactMarkdown>
+        <div className='pt6 pb12'>
+          <Suspense fallback={<div>Loading Code Block...</div>}>
+            <ReactMarkdown 
+              className='markdown-body' 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                // @ts-ignore
+                code: ({ node, inline, className, children, ...props }: { node?: any; inline: boolean; className?: string; children: React.ReactNode; }) => {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <CodeBlock language={match[1]} {...props}>
+                      {String(children).replace(/\n$/, '')}
+                    </CodeBlock>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </Suspense>
         </div>
       </div>
     </div>

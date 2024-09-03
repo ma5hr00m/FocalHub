@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { animationStageAtom } from '@/jotai/jotai';
 import Navbar from '@/components/Function/NavBar/index';
-import Wellcome from '@/pages/Welcome';
-import Home from '@/pages/Home';
-import Gallery from '@/pages/Gallery';
-import Article from '@/pages/Article';
-import Articles from '@/pages/Articles';
 import OpeningAnimation from '@/components/OpeningAnimation';
-// import Butterfly from '@/components/Butterfly';
-
+import Footer from '@/components/Function/Footer';
 import { SiGithub, SiJuejin } from "react-icons/si";
 import { BsSkipStartBtnFill } from "react-icons/bs";
 import { PiArticleMediumFill } from "react-icons/pi";
 import { IoImagesSharp } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
-import Footer from '@/components/Function/Footer';
+
+const Wellcome = lazy(() => import('@/pages/Welcome'));
+const Home = lazy(() => import('@/pages/Home'));
+const Gallery = lazy(() => import('@/pages/Gallery'));
+const Article = lazy(() => import('@/pages/Article'));
+const Articles = lazy(() => import('@/pages/Articles'));
 
 interface AppRoutesProps {}
 
@@ -63,30 +62,29 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
         return <OpeningAnimation />;
       case "end":
         return (
-          <div id='focalhub-app' className='min-h-100vh h-full flex flex-col bg-gray-1'>
+          <div id='focalhub-app' className='min-h-100vh h-full flex flex-col'>
             <Navbar items={navItems} />
             <div className='flex-1'>
-              <Routes>
-                {/* 打算重做首页，原 Home 标签页转移到 /home 下 */}
-                <Route path='/' element={<Wellcome />} />
-                <Route path='/home' element={<Home links={links} />} />
-                <Route path='/gallery' element={<Gallery />} />
-                <Route path='/article/:slug' element={<Article />} />
-                <Route path='/articles' element={<Articles />} />
-              </Routes>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                  <Route path='/' element={<Wellcome />} />
+                  <Route path='/home' element={<Home links={links} />} />
+                  <Route path='/gallery' element={<Gallery />} />
+                  <Route path='/article/:slug' element={<Article />} />
+                  <Route path='/articles' element={<Articles />} />
+                </Routes>
+              </Suspense>
             </div>
-            <Footer></Footer>
+            <Footer />
           </div>
         );
       default:
-        return <div>Loading...</div>; // 默认状态
+        return <div>Loading...</div>;
     }
   };
 
   return (
     <BrowserRouter>
-      {/* lowpoly动态切页按钮延后开发，先做基础的 NavBar */}
-      {/* <Butterfly></Butterfly> */}
       {renderContent()}
     </BrowserRouter>
   );
