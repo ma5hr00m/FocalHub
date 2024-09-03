@@ -61,3 +61,4 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, children }) => {
 };
 
 export default CodeBlock;
+// 嘶，我的 CodeBlock 组件体积很大，引用时会导致加载很慢，等后面完善优化
