@@ -2,9 +2,8 @@
 FROM node:20-alpine AS frontend-builder
 
 WORKDIR /app/client
-COPY ./client/package*.json ./
-RUN npm install --legacy-peer-deps --force
 COPY ./client ./
+RUN npm install --legacy-peer-deps
 RUN npm run build
 
 # 后端构建阶段
