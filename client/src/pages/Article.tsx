@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaFileWord, FaClock } from "react-icons/fa6";
+
+import '@/styles/markdown.scss';
+
 // 定义 ArticlePost 类型
 interface ArticlePost {
   title: string;
@@ -50,12 +55,31 @@ const Article: React.FC = () => {
   if (!post) return <div>Post not found.</div>;
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.date}</p>
-      <ReactMarkdown>{post.content}</ReactMarkdown>
-      <p>Word Count: {post.word_count}</p>
-      <p>Estimated Read Time: {post.estimated_read_time} minute(s)</p>
+    <div className='h-full w-full flex justify-center'>
+      <div className='w-200 min-w-60 px6 flex flex-col gap-y-4 pt6'>
+        <div className='w-full flex-col text-wrap'>
+          <p className='text-8 font-700'>{post.title}</p>
+          <div className='pt4 flex gap-x-4 text-4 font-500'>
+            <span className='flex items-center gap-x1'>
+              <FaCalendarAlt />
+              发布时间: {post.date}
+            </span>
+          </div>
+          <div className='pt2 flex gap-x5 text-4 font-500'>  
+            <span className='flex items-center gap-x1'>
+              <FaFileWord />
+              文章字数: {post.word_count}
+            </span>
+            <span className='flex items-center gap-x1'>
+              <FaClock />
+              预估阅读时间: {post.estimated_read_time}分钟
+            </span>
+          </div>
+        </div>
+        <div className='pt6'>
+          <ReactMarkdown className='markdown-body'>{post.content}</ReactMarkdown>
+        </div>
+      </div>
     </div>
   );
 };

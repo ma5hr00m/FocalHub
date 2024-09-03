@@ -42,25 +42,22 @@ const ArticleList: React.FC = () => {
   if (Object.keys(articlesByYear).length === 0) return <div>No articles found.</div>;
 
   return (
-    <div>
-      <h1>Article List</h1>
-      {Object.entries(articlesByYear).map(([year, articles]) => (
-        <div key={year}>
-          <h2>{year}</h2>
-          <ul>
-            {articles.map(({ path, title, date }) => (
-              <li key={path}>
-                <div>
-                  <Link to={path}>
-                    <h3>{title}</h3>
-                  </Link>
-                  <p>{date}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className='flex-1 w-full flex justify-center'>
+      <div className='w-200 min-w-60 px6 flex flex-col gap-y-4 pt6'>
+        {Object.entries(articlesByYear).map(([year, articles]) => (
+          <div key={year} className='pt4 first:pt0'>
+            <span className='text-6 font-700 text-gray-9'>{year}</span>
+            <div className='pt2 flex flex-col gap-y2'>
+              {articles.map(({ path, title, date }) => (
+                <Link to={path} key={path} className='px2 flex justify-between font-600 text-gray-5 visited:text-gray-5 hover:text-green-5'>
+                  <span className='whitespace-nowrap overflow-hidden'>{title}</span>
+                  <span className='w-22 flex justify-end whitespace-nowrap overflow-hidden'>{date}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

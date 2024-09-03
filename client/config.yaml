@@ -3,3 +3,17 @@ site:
   favicon: "https://github.githubassets.com/favicons/favicon.svg"
   description: "kinoko Website."
   author: "kinoko"
+
+links:
+  - href: "https://github.com/ma5hr00m"
+    icon: "<SiGithub className='text-7' />"
+  - href: "https://x.com/ma5hr00m"
+    icon: "<FaXTwitter className='text-7' />"
+  - href: "https://juejin.cn/user/811865333304430"
+    icon: "<SiJuejin className='text-7' />"
+  - href: "/articles"
+    icon: "<PiArticleMediumFill className='text-7' />"
+  - href: "/animation"
+    icon: "<BsSkipStartBtnFill className='text-7' />"
+  - href: "/gallery"
+    icon: "<IoImagesSharp className='text-7' />"

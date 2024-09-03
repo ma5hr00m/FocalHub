@@ -4,6 +4,7 @@ import { SiteConfig } from '../types/types';
 
 interface Config {
     site: SiteConfig;
+    links: Array<{ href: string; icon: JSX.Element }>;
 }
 
 // 解析 YAML 配置
