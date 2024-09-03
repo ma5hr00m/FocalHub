@@ -3,7 +3,6 @@ FROM node:20-alpine AS frontend-builder
 
 WORKDIR /app/client
 COPY ./client/package*.json ./
-RUN npm install -g npm@latest
 RUN npm install --legacy-peer-deps
 COPY ./client ./
 RUN npm run build
