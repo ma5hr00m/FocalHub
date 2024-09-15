@@ -52,8 +52,8 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
   const navItems = [
     { path: '/', label: '主页' },
     { path: '/articles', label: '文章' },
-    { path: '/gallery', label: '画廊' },
-    { path: '/about', label: '关于' },
+    // { path: '/gallery', label: '画廊' },
+    // { path: '/about', label: '关于' },
   ];
 
   const renderContent = () => {
@@ -64,7 +64,7 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
         return (
           <div id='focalhub-app' className='min-h-100vh h-full flex flex-col'>
             <Navbar items={navItems} />
-            <div className='flex-1'>
+            <div className='flex-1 pt15'>
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
                   <Route path='/' element={<Wellcome />} />
