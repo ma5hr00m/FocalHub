@@ -58,7 +58,7 @@ const useImageLoader = (images: ImageData[]) => {
     const minIndex = getMinHeightIndex();
     const imgElement = document.createElement('img');
     imgElement.src = src;
-    imgElement.className = 'w-full opacity-0 transition-opacity duration-500 mb-3 rounded-sm border-solid border-1.5 border-gray-200';
+    imgElement.className = 'w-full opacity-0 transition-opacity duration-500 mb-3 rounded-sm border-solid border-1.5 border-gray-2 bg-gray-1';
 
     const container = arr.current[minIndex];
     if (container) {
@@ -98,7 +98,7 @@ const PhotoWall: React.FC<PhotoWallProps> = ({ images }) => {
   return (
     <ul className="px-4 w-fit list-none flex">
       {Array.from({ length: columnCount }).map((_, index) => (
-        <li key={index} className="w-52 my-3">
+        <li key={index} className="relative w-48 sm:w-56 my-3">
           <div ref={el => (arr.current[index] = el!)} className="w-full px-2">
             {images.map((image, imgIndex) => (
               loadedImages[imgIndex] && (

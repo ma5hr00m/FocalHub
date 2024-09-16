@@ -30,7 +30,7 @@ const OpeningAnimation: React.FC<OpeningAnimationProps> = () => {
       onAnimationEnd={handleAnimationEnd} 
       onAnimationStart={handleAnimationStart}
     >
-      <div className="animated-element" style={{ animation: 'slideIn 2s' }}>
+      <div className="animated-element" style={{ animation: 'slideIn .01s' }}>
         Another Animated Element
       </div>
     </div>
