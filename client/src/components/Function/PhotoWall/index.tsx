@@ -32,10 +32,10 @@ const useColumnCount = () => {
   return columnCount;
 };
 
-const useImageLoader = (images: ImageData[]) => {
+const useImageLoader = (images: ImageData[], columnCount: number) => {
   const [loadedImages, setLoadedImages] = useState<boolean[]>(Array(images.length).fill(false));
   const arr = useRef<HTMLDivElement[]>([]);
-  const minHeight = useRef<number[]>(Array(4).fill(0)); // Default to 4 columns
+  const minHeight = useRef<number[]>(Array(columnCount).fill(0));
 
   const handleScroll = () => {
     const newLoadedImages = [...loadedImages];
@@ -88,12 +88,16 @@ const useImageLoader = (images: ImageData[]) => {
     });
   }, [images]);
 
+  useEffect(() => {
+    minHeight.current = Array(columnCount).fill(0);
+  }, [columnCount]);
+
   return { loadedImages, arr };
 };
 
 const PhotoWall: React.FC<PhotoWallProps> = ({ images }) => {
   const columnCount = useColumnCount();
-  const { loadedImages, arr } = useImageLoader(images);
+  const { loadedImages, arr } = useImageLoader(images, columnCount);
 
   return (
     <ul className="px-4 w-fit list-none flex">
