@@ -24,9 +24,9 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
 
   return (
     <div className='relative flex-1 w-full flex items-center justify-center'>
-      <div className='w-200 min-w-60 px6 flex flex-col items-center gap-y-4 pt6'>
+      <div className='w-220 min-w-60 px6 flex flex-col items-center'>
         {/* 欢迎 */}
-        <div className="h-200 flex flex-col items-center justify-center">
+        <div className="bg-red w-full h-120 flex flex-col items-center justify-center">
           <div className="profile flex flex-col items-center justify-center">
             <img src='https://img.ma5hr00m.top/main/emoticon/6.png' className='w-40' />
             <p className="text-7 font-600 mt4 mb0 text-gray-6">欢迎来到阿菇的站点</p>
@@ -46,6 +46,8 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
           </div>
         </div>
         {/*  */}
+        <div className="bg-yellow w-full h-fit flex flex-col items-center">
+        </div>
       </div>
     </div>
   );
