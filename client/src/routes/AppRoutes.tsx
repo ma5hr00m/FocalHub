@@ -64,7 +64,7 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
         return (
           <div id='focalhub-app' className='min-h-100vh h-full flex flex-col'>
             <Navbar items={navItems} />
-            <div className='flex-1 pt15'>
+            <div className='flex-1 pt15 bg-[#F2F3F5]'>
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
                   <Route path='/' element={<Wellcome />} />

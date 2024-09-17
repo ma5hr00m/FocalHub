@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface WellcomeProps {}
 
+interface Article {
+  path: string;
+  title: string;
+  date: string;
+}
+
 const Wellcome: React.FC<WellcomeProps> = ({}) => {
+  const [recentArticles, setRecentArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const links = [
     {
       href: "https://github.com/ma5hr00m",
@@ -22,11 +32,31 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
     }
   ];
 
+  useEffect(() => {
+    const fetchRecentArticles = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch('/api/v1/articles/recent');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setRecentArticles(data);
+      } catch (error) {
+        console.error('Error fetching recent articles:', error);
+        setError('Failed to load recent articles. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecentArticles();
+  }, []);
+
   return (
     <div className='relative flex-1 w-full flex items-center justify-center'>
       <div className='w-220 min-w-60 px6 flex flex-col items-center'>
         {/* 欢迎 */}
-        <div className="w-full h-120 flex flex-col items-center justify-center">
+        <div className="w-full h-[calc(100vh-3.75rem)] flex flex-col items-center justify-center">
           <div className="profile flex flex-col items-center justify-center">
             <img src='https://img.ma5hr00m.top/main/emoticon/6.png' className='w-40' />
             <p className="text-7 font-600 mt4 mb0 text-gray-6">欢迎来到阿菇的站点</p>
@@ -35,7 +65,6 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
               {links.map((link, index) => (
                 <a
                   key={index}
-                  // className="box-border px4 py2 bg-green-4 hover:bg-green-5 rounded-sm text-white"
                   className="duration-300 box-border px4 h9 flex justify-center items-center border-solid border-1px border-gray-6 hover:border-green-5 hover:text-green-5 text-3.5 font-400 rounded-sm text-gray-6"
                   href={link.href}
                 >
@@ -46,8 +75,18 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
           </div>
         </div>
         {/* 最近更新 */}
-        <div className="bg-yellow w-full h-fit flex flex-col items-center">
-
+        <div className="w-full h-fit flex flex-col items-center">
+          {loading && <p>Loading recent articles...</p>}
+          {error && <p>{error}</p>}
+          {recentArticles.length === 0 && !loading && <p>No recent articles found.</p>}
+          <div className="w-full gap-4 flex flex-col md:flex-row">
+            {recentArticles.map(({ path, title, date }) => (
+              <div key={path} className="flex-1 p-4 bg-white border-solid border-1 border-gray-2 w-full text-center duration-300 hover:border-green-5 hover:cursor-pointer">
+                <a href={path} className="text-green-5">{title}</a>
+                <p className="text-gray-500 text-sm">{date}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

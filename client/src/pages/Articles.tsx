@@ -22,7 +22,7 @@ const ArticleList: React.FC = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/v1/articles');
+        const response = await fetch('/api/v1/articles/all');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setArticlesByYear(data);
