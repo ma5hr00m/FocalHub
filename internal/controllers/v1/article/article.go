@@ -19,6 +19,18 @@ func GetArticles(c *gin.Context) {
 	c.JSON(http.StatusOK, summaries)
 }
 
+// GetArticles 处理获取博客列表请求
+func GetRecentArticles(c *gin.Context) {
+	limit := 3
+
+	summaries, err := utils.ListRecentArticles("docs", limit)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, summaries)
+}
+
 // GetArticle 处理获取单个博客文章请求
 func GetArticle(c *gin.Context) {
 	slug := c.Param("slug")

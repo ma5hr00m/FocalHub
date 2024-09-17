@@ -1,7 +1,7 @@
 ---
 title: markdown样式测试文件
-date: '2024-08-10'
-categories:
+date: 2024-09-17 '2024-08-10'
+category:
   - 'Markdown'
 author: kinoko
 cover: https://i.pinimg.com/736x/a2/98/85/a29885eb1ca507fa20147ad53f24dc3e.jpg
@@ -9,8 +9,6 @@ tags:
   - Markdown
   - Test
 ---
-
-# 不建议使用一级标题
 
 本博客的文章页支持在 markdown 中使用一级标题语法，但不推荐。建议您通过编写 `front-matter` 的 `title` 属性设置文章主标题。
 

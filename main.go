@@ -65,7 +65,8 @@ func main() {
 	api.GET("/ping", ping.GetPing)
 
 	v1 := api.Group("/v1")
-	v1.GET("/articles", article.GetArticles)
+	v1.GET("/articles/all", article.GetArticles)
+	v1.GET("/articles/recent", article.GetRecentArticles)
 	v1.GET("/article/:slug", article.GetArticle)
 	v1.GET("/oss/tree", aliyunoss.GetFileTree)
 	v1.GET("/oss/filelist", aliyunoss.GetFileList)

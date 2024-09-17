@@ -36,7 +36,7 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
                 <a
                   key={index}
                   // className="box-border px4 py2 bg-green-4 hover:bg-green-5 rounded-sm text-white"
-                  className="duration-300 box-border px4 py2 border-solid border-2px border-gray-6 hover:border-green-5 hover:text-green-5 text-3.5 font-400 rounded-sm text-gray-6"
+                  className="duration-300 box-border px4 h9 flex justify-center items-center border-solid border-1px border-gray-6 hover:border-green-5 hover:text-green-5 text-3.5 font-400 rounded-sm text-gray-6"
                   href={link.href}
                 >
                   {link.text}
@@ -45,8 +45,9 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
             </div>
           </div>
         </div>
-        {/*  */}
+        {/* 最近更新 */}
         <div className="bg-yellow w-full h-fit flex flex-col items-center">
+
         </div>
       </div>
     </div>

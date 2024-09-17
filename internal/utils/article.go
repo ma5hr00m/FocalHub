@@ -78,6 +78,41 @@ func ListArticlePosts(docsDir string) (map[string][]ArticlePostSummary, error) {
 	return groupedByYear, nil
 }
 
+// ListRecentArticles 列出最近的博客文章
+func ListRecentArticles(docsDir string, limit int) ([]ArticlePostSummary, error) {
+	files, err := os.ReadDir(docsDir)
+	if err != nil {
+		return nil, err
+	}
+
+	var summaries []ArticlePostSummary
+	for _, file := range files {
+		if filepath.Ext(file.Name()) == ".md" {
+			post, err := ReadMarkdownFile(filepath.Join(docsDir, file.Name()))
+			if err == nil {
+				summaries = append(summaries, ArticlePostSummary{
+					Path:  "/article/" + file.Name()[:len(file.Name())-3],
+					Title: post.Title,
+					Date:  post.Date,
+				})
+			}
+		}
+	}
+
+	// 按照日期排序
+	sort.Slice(summaries, func(i, j int) bool {
+		dateI, _ := time.Parse("2006-01-02", summaries[i].Date)
+		dateJ, _ := time.Parse("2006-01-02", summaries[j].Date)
+		return dateI.After(dateJ)
+	})
+
+	// 限制返回的文章数量
+	if limit > len(summaries) {
+		limit = len(summaries)
+	}
+	return summaries[:limit], nil
+}
+
 // ReadMarkdownFile 读取 Markdown 文件并提取 front matter 和内容
 func ReadMarkdownFile(filename string) (ArticlePost, error) {
 	data, err := os.ReadFile(filename) // 使用 os.ReadFile 替代 ioutil.ReadFile

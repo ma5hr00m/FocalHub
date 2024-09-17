@@ -49,7 +49,7 @@ const ArticleList: React.FC = () => {
             <span className='text-6 font-700 text-gray-8'>{year}</span>
             <div className='pt2 flex flex-col gap-y1'>
               {articles.map(({ path, title, date }) => (
-                <Link to={path} key={path} className='px2 flex justify-between font-400 text-gray-6 visited:text-gray-6 hover:text-green-5'>
+                <Link to={path} key={path} className='flex justify-between font-400 text-gray-6 visited:text-gray-6 hover:text-green-5'>
                   <span className='whitespace-nowrap overflow-hidden text-4'>{title}</span>
                   <span className='w-22 flex justify-end whitespace-nowrap overflow-hidden'>{date}</span>
                 </Link>
