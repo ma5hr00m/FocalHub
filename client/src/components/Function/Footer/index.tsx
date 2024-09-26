@@ -1,14 +1,29 @@
 import React from "react";
+import { Icon } from '@iconify/react';
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = ({}) => {
   
   return (
-    <div className='flex h-16 justify-center items-center bg-[#F2F3F5]'>
-      <div className='h-full px8 w-320 flex justify-center items-center'>
-        <div className="">
-          <span className="text-4 font-400 text-gray-8">Copyright © Kinoko 2024</span>
+    <div className='flex h-36 justify-center items-center'>
+      <div className='h-full px8 w-320 flex justify-between items-center'>
+        <div className="h-full flex flex-col items-start justify-center text-3.5 font-400 text-gray-5 gap-y-1">
+          <span className="">浙ICP备2023028448号-1</span>
+          <span className="">Copyright © Kinoko 2024. All rights reserved.</span>
+        </div>
+        <div className="h-full flex flex-col items-start justify-center">
+          <div className="flex gap-x-3">
+            <a className="text-6 duration-300 text-gray-5 hover:text-red-6" href="https://github.com/ma6hr00m">
+              <Icon className="" icon="fa-brands:github-alt" />
+            </a>
+            <a className="text-6 duration-300 text-gray-5 hover:text-red-6" href="https://github.com/ma5hr00m">
+              <Icon className="" icon="fa-brands:qq" />
+            </a>
+            <a className="text-6 duration-300 text-gray-5 hover:text-red-6" href="https://github.com/ma5hr00m">
+              <Icon className="" icon="fa-brands:twitter" />
+            </a>
+          </div>
         </div>
       </div>
     </div>

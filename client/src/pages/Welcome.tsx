@@ -53,10 +53,23 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
   }, []);
 
   return (
-    <div className='relative flex-1 w-full flex items-center justify-center'>
-      <div className='w-220 min-w-60 px6 flex flex-col items-center'>
-        {/* 欢迎 */}
-        <div className="w-full h-[calc(100vh-3.75rem)] flex flex-col items-center justify-center">
+    <div className='relative flex-1 w-full flex flex-col items-center justify-center'>
+      {/* https://www.freepik.com/search?format=search&query=4k%20wallpaper%20fire%20 */}
+      <div className="w-full h-60vh bg-[url('https://agu-img.oss-cn-hangzhou.aliyuncs.com/main/banner2.jpg')] bg-cover bg-center">
+        <hgroup className="w-full h-full flex flex-col justify-center items-center justify-center gap-y-2">
+          <h1 className="text-16 tracking-normal text-[#fffe]">Kinoko's Blog</h1>
+          <p className="text-4.5 tracking-wide text-[#fffe] font-400">用超绝的行动力压倒心中的犹豫不觉</p>
+        </hgroup>
+      </div>
+      <div className="w-full h-200 bg-cover bg-center"></div>
+    </div>
+  );
+}
+
+export default Wellcome;
+
+{/* 欢迎 */}
+        {/* <div className="w-full h-[calc(100vh-3.75rem)] flex flex-col items-center justify-center">
           <div className="profile flex flex-col items-center justify-center">
             <img src='https://img.ma5hr00m.top/main/emoticon/6.png' className='w-40' />
             <p className="text-7 font-600 mt4 mb0 text-gray-6">欢迎来到阿菇的站点</p>
@@ -73,9 +86,9 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
         {/* 最近更新 */}
-        <div className="w-full h-fit flex flex-col items-center">
+        {/* <div className="w-full h-fit flex flex-col items-center">
           {loading && <p>Loading recent articles...</p>}
           {error && <p>{error}</p>}
           {recentArticles.length === 0 && !loading && <p>No recent articles found.</p>}
@@ -87,10 +100,4 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Wellcome;
+        </div> */}
