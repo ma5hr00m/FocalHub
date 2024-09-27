@@ -21,7 +21,7 @@ func GetArticles(c *gin.Context) {
 
 // GetArticles 处理获取博客列表请求
 func GetRecentArticles(c *gin.Context) {
-	limit := 3
+	limit := 8
 
 	summaries, err := utils.ListRecentArticles("docs", limit)
 	if err != nil {

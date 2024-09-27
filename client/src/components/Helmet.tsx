@@ -8,7 +8,7 @@ interface HelmetProps {
 }
 
 const HeadHelmet: React.FC<HelmetProps> = ({ config }) => {
-  const { title, description, author, keywords, favicon, ogimage } = config;
+  const { title, description, author, keywords, ogimage } = config;
 
   return (
     <Helmet>
@@ -16,8 +16,8 @@ const HeadHelmet: React.FC<HelmetProps> = ({ config }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="robots" content="index,follow" />
       <meta name="referrer" content="no-referrer" />
-      <title>{title}</title>
-      <link rel="icon" type="image/svg+xml" href={favicon} />
+      <title>Kinoko's Blog</title>
+      <link rel="icon" type="image/svg+xml" href="logo.svg" />
       {ogimage && <meta property="og:image" content={ogimage} />}
       {description && <meta property="og:description" content={description} />}
       {description && <meta name="description" content={description} />}

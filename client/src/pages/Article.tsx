@@ -56,7 +56,7 @@ const Article: React.FC = () => {
 
   return (
     <div className='h-full w-full flex justify-center relative'>
-      <div className='relative w-160 min-w-60 mx-6 flex flex-col gap-y-4 pt-4'>
+      <div className='relative w-160 min-w-60 mx-6 flex flex-col gap-y-4 pt-4 text-gray-8'>
         <h1 className='text-8 font-700'>{post.title}</h1>
         <div className='pt-4 flex gap-x-4 text-4 font-500'>
           <span className='flex items-center gap-x-1'>
@@ -108,7 +108,7 @@ const Article: React.FC = () => {
           </div>
         </div>
         {/* TOC */}
-        <div className='absolute h-full w-60 right--70'>
+        <div className='absolute h-full w-60 right--70 flex sm:hidden'>
           <TableOfContents content={post.content} />
         </div>
       </div>

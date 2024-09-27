@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 interface NavItem {
@@ -13,42 +13,39 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ items }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
+  const handleScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    if (scrollY > 0 && !isScrolled) {
       setIsScrolled(true);
-    } else {
+    } else if (scrollY === 0 && isScrolled) {
       setIsScrolled(false);
     }
-  };
+  }, [isScrolled]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      requestAnimationFrame(handleScroll);
     };
-  }, []);
+
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScroll]);
 
   return (
-    <div className={`fixed z-200 flex h14 w-full justify-center duration-300 shadow-md ${isScrolled ? 'backdrop-filter backdrop-blur-md h12 bg-[#101323a0]' : ''}`}>
-      <div className='h-full px-8 w-260 flex justify-between'>
-        <Link to='/' className='flex h-full items-center justify-center gap-x-3 text-white'>
-          <img src='https://img.ma5hr00m.top/main/emoticon/favicon-64.ico' className='w-7' />
-          <span className='flex text-4.5 font-600'>菇言菇语</span>
+    <div className={`fixed z-100 flex w-full justify-center duration-200 shadow-md ${isScrolled ? 'h-13 bg-[#30303fd0] backdrop-filter backdrop-blur-xl' : 'h-18 bg-transparent'}`}>
+      <div className='flex h-full w-240 justify-between px-8'>
+        <Link to='/' className='flex h-full items-center justify-center gap-x-3 text-gray-1'>
+          <img src='./logo.svg' className='w6' alt='Logo' />
+          <p className='flex text-4.5 font-200 tracking-wide'>菇言菇语</p>
         </Link>
-        {/* PC 页面导航栏 */}
         <div className='hidden md:flex h-full items-center gap-x-7'>
           {items.map((item) => (
-            <div key={item.path}>
-              <Link to={item.path} className='text-3.75 font-600 duration-200 text-white visited:text-white hover:text-red-6'>
-                {item.label}
-              </Link>
-            </div>
+            <Link key={item.path} to={item.path} className='text-3.75 font-200 duration-200 text-gray-1 visited:text-gray-1 hover:text-blue-500'>
+              {item.label}
+            </Link>
           ))}
         </div>
-        {/* 移动设备导航栏 */}
-        <div className='flex md:hidden'>
-          {/* 这里可以添加移动设备的导航项 */}
-        </div>
+        <div className='flex md:hidden'></div>
       </div>
     </div>
   );
