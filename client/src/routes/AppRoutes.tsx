@@ -52,8 +52,8 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
   const navItems = [
     { path: '/', label: '主页' },
     { path: '/articles', label: '文章' },
-    { path: '/gallery', label: '图床' },
-    { path: '/about', label: '关于' },
+    // { path: '/gallery', label: '图床' },
+    // { path: '/about', label: '关于' },
   ];
 
   const renderContent = () => {

@@ -56,14 +56,14 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
   }, [handleScroll]);
 
   return (
-    <div className='relative w-ful h-fit flex flex-col'>
+    <div className='relative w-full h-fit flex flex-col'>
       <div className="w-full h-fit">
         {/* Banner */}
-        <div id="banner-wrapper" className="relative w-100vw h-100vh overflow-hidden flex justify-center items-center">
-          <img src="./banner.jpeg" className="z-0 absolute w-full h-full object-cover" />
-          <hgroup className={`z-1 flex flex-col items-center duration-400 ease-out ${isScrolled ? 'blur-[20rem]' : ''}`}>
-            <h1 className="text-10 tracking font-700 text-gray-1 md:text-12 lg:text-14">Kinoko's Blog</h1>
-            <p className="text-5">人生是一场无法停止的旅行</p>
+        <div id="banner-wrapper" className="relative w-100vw h-50vh overflow-hidden flex justify-center items-center">
+          <img src="./thumb-1920-1355524.png" className="z-0 absolute w-full h-full object-cover" />
+          <hgroup className="z-1 flex flex-col items-center duration-400 ease-ou">
+            <h1 className="text-8 tracking-widest font-600 text-gray-1 md:text-10 lg:text-12">阿菇的博客</h1>
+            <p className="text-gray-1 text-3 md:text-4 lg:text-5">人生是一场无法停止的旅行</p>
           </hgroup>
         </div>
         {/* Recent Articles */}
@@ -103,7 +103,7 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
                     {/* 可以通过伪元素实现，但是用 tailwindcss 就没必要了 */}
                     <p id="title" className="relative text-5 font-500 text-blue-500 group">
                       {title}
-                      <span className="absolute bottom--1 left-0 h.5 w0 bg-blue-500 h.6 duration-300 group-hover:w-full"></span>
+                      <span className="absolute bottom--1 left-0 h-.25 w0 bg-blue-500 h.6 duration-300 group-hover:w-full"></span>
                     </p>
                   </div>
                   <p id="synopsis" className="text-3.5 line-height-relaxed text-gray-500 w-full overflow-hidden overflow-ellipsis line-clamp-3">

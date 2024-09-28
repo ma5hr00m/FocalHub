@@ -55,8 +55,17 @@ const Article: React.FC = () => {
   };
 
   return (
-    <div className='h-full w-full flex justify-center relative'>
-      <div className='relative w-160 min-w-60 mx-6 flex flex-col gap-y-4 pt-4 text-gray-8'>
+    <div className='relative w-full h-fit flex flex-col'>
+      <div className="w-full h-fit flex flex-col items-center mb12">
+        {/* Banner */}
+        <div id="banner-wrapper" className="relative w-100vw h-50vh overflow-hidden flex justify-center items-center">
+          <img src="./thumb-1920-699287.jpg" className="z-0 absolute w-full h-full object-cover" />
+          <hgroup className="z-1 flex flex-col items-center duration-400 ease-ou">
+            <h1 className="text-8 tracking-widest font-600 text-gray-1 md:text-10 lg:text-12">文章</h1>
+            <p className="text-gray-1 text-3 md:text-4 lg:text-5">记录学习的点点滴滴</p>
+          </hgroup>
+        </div>
+        {/* Markdown */}
         <h1 className='text-8 font-700'>{post.title}</h1>
         <div className='pt-4 flex gap-x-4 text-4 font-500'>
           <span className='flex items-center gap-x-1'>

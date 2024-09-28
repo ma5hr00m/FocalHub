@@ -32,11 +32,11 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
   }, [handleScroll]);
 
   return (
-    <div className={`fixed z-100 flex w-full justify-center duration-200 shadow-md ${isScrolled ? 'h-13 bg-[#30303fd0] backdrop-filter backdrop-blur-xl' : 'h-18 bg-transparent'}`}>
+    <div className={`fixed z-100 flex w-full justify-center duration-200 shadow-md ${isScrolled ? 'h-13 bg-[#30304ad0] backdrop-filter backdrop-blur-xl' : 'h-18 bg-transparent'}`}>
       <div className='flex h-full w-240 justify-between px4'>
         <Link to='/' className='flex h-full items-center justify-center gap-x-3 text-gray-1'>
           <img src='./logo.svg' className='w6' alt='Logo' />
-          <p className='flex text-4.5 font-200 tracking-wide'>菇言菇语</p>
+          <p className='flex text-4.5 font-200 tracking-wide text-gray-1'>菇言菇语</p>
         </Link>
         <div className='hidden md:flex h-full items-center gap-x-7'>
           {items.map((item) => (
