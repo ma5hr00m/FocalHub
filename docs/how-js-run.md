@@ -1,7 +1,8 @@
 ---
 title: JavaScript执行原理
-date: 2024-09-17
-category:
+date: 2024-02-10
+category: JavaScript
+cover:
 ---
 
 最近在复习 JavaScript 反混淆相关内容，正好给执行原理补个档，之前旧版的随旧博客一起遗失了，这里重新写了一篇。

@@ -61,32 +61,53 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
         {/* Banner */}
         <div id="banner-wrapper" className="relative w-100vw h-100vh overflow-hidden flex justify-center items-center">
           <img src="./banner.jpeg" className="z-0 absolute w-full h-full object-cover" />
-          <hgroup className={`z-1 flex flex-col items-center duration-800 ease-out ${isScrolled ? 'blur-[20rem]' : ''}`}>
+          <hgroup className={`z-1 flex flex-col items-center duration-400 ease-out ${isScrolled ? 'blur-[20rem]' : ''}`}>
             <h1 className="text-10 tracking font-700 text-gray-1 md:text-12 lg:text-14">Kinoko's Blog</h1>
             <p className="text-5">人生是一场无法停止的旅行</p>
           </hgroup>
         </div>
         {/* Recent Articles */}
-        <div id="recent-articles-wrapper" className="relative w-100vw h-fit overflow-hidden pt8 pb8 px8 flex flex-col justify-center items-center">
-          <div className="w-full flex flex-col items-center gap-y-4 mb16">
+        <div
+          id="recent-articles-wrapper"
+          className="relative w-100vw h-fit overflow-hidden pt8 pb8 px4 flex flex-col justify-center items-center"
+        >
+          <div className="w-full flex flex-col items-center gap-y-4 mb12">
             {loading && <p>Loading recent articles...</p>}
             {error && <p>{error}</p>}
             {recentArticles.length === 0 && !loading && <p>No recent articles found.</p>}
             {recentArticles.map(({ path, title, date }) => (
-              <a key={path} href={path} className="relative h48 max-w-220 wfull mx8 flex justify-between group bg-white overflow-hidden rounded-md border-solid border-1.5 border-gray-2 duration-300 hover:border-blue-500">
-                <div className="h-full w-72 overflow-hidden">
-                  <img className="w-full h-full object-cover duration-300 group-hover:scale-110" src="banner.jpeg"></img>
+              <a
+                key={path}
+                href={path}
+                className="
+                relative max-w-220 wfull justify-between group
+                bg-white overflow-hidden rounded-md duration-300
+                border-solid border-1.5 border-gray-2 hover:border-blue-500
+                h-94 md:h48
+                mx8 flex flex-col md:flex-row"
+              >
+                <div
+                  className="
+                  overflow-hidden
+                  w-full h-48 md:w-72 md:h-full
+                  "
+                >
+                  <img
+                    className="w-full h-full object-cover duration-300 group-hover:scale-110"
+                    src="banner.jpeg"
+                  ></img>
                 </div>
-                <div className="flex-1 h-full p6 flex flex-col justify-between">
+                <div
+                  className="flex-1 h-full p6 flex flex-col justify-between">
                   <div className="w-full flex justify-start">
                     {/* 可以通过伪元素实现，但是用 tailwindcss 就没必要了 */}
                     <p id="title" className="relative text-5 font-500 text-blue-500 group">
                       {title}
-                      <span className="absolute bottom--1 left-0 h.5 w0 bg-blue-500 h1 duration-300 group-hover:w-full"></span>
+                      <span className="absolute bottom--1 left-0 h.5 w0 bg-blue-500 h.6 duration-300 group-hover:w-full"></span>
                     </p>
                   </div>
                   <p id="synopsis" className="text-3.5 line-height-relaxed text-gray-500 w-full overflow-hidden overflow-ellipsis line-clamp-3">
-                  在《西游记》中，唐僧师徒四人分别是唐僧、孙悟空、猪八戒和沙僧。唐僧是取经的主角，性格仁慈，信仰坚定；孙悟空是他的徒弟，拥有强大的法力和战斗能力，性格机智勇敢；猪八戒则是个好吃懒做的角色，常常因贪吃而惹出麻烦；沙僧则是忠厚老实，默默奉献的角色。四人一路上经历了九九八十一难，遇到了各种妖魔鬼怪，孙悟空凭借他的法力和智慧，屡次化险为夷。故事中不仅有精彩的打斗场面，还有深刻的哲理，展现了人性中的善与恶、正义与邪恶的斗争。最终，唐僧师徒成功取得真经，回到大唐，弘扬佛法，造福众生。这个故事不仅富有娱乐性，还蕴含了丰富的文化内涵，深受读者喜爱。
+                    在《西游记》中，唐僧师徒四人分别是唐僧、孙悟空、猪八戒和沙僧。唐僧是取经的主角，性格仁慈，信仰坚定；孙悟空是他的徒弟，拥有强大的法力和战斗能力，性格机智勇敢；猪八戒则是个好吃懒做的角色，常常因贪吃而惹出麻烦；沙僧则是忠厚老实，默默奉献的角色。四人一路上经历了九九八十一难，遇到了各种妖魔鬼怪，孙悟空凭借他的法力和智慧，屡次化险为夷。故事中不仅有精彩的打斗场面，还有深刻的哲理，展现了人性中的善与恶、正义与邪恶的斗争。最终，唐僧师徒成功取得真经，回到大唐，弘扬佛法，造福众生。这个故事不仅富有娱乐性，还蕴含了丰富的文化内涵，深受读者喜爱。
                   </p>
                   <div className="flex justify-between">
                     <span className="py-.5 px-5 text-2.75 line-height-none bg-orange-500 rounded-full text-white flex items-center">JavaScript</span>
@@ -102,7 +123,7 @@ const Wellcome: React.FC<WellcomeProps> = ({}) => {
               <Link to="/articles" className="relative text-blue-500 flex items-center gap-x-.5 group">
                 <img src="./more.svg" className="w-4" />
                 文章
-                <span className="absolute bottom--1 left-0 h.5 w0 bg-blue-500 h1 duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom--1 left-0 h.5 w0 bg-blue-500 h.6 duration-300 group-hover:w-full"></span>
               </Link>
             </p>
           </div>

@@ -1,7 +1,8 @@
 ---
 title: 燕市、铜器与《铜匠的花嫁》
-date: 2024-09-17
-category:
+date: 2023-08-12
+category: ACG
+cover:
 ---
 
 <div align='center'>

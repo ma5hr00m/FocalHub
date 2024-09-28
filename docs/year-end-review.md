@@ -1,7 +1,8 @@
 ---
 title: 2023年终总结
-date: 2024-09-17 
-category:
+date: 2023-12-25
+category: Life
+cover:
 ---
 
 ![20231230134727](https://img.ma5hr00m.top/blog/20231230134727.png)

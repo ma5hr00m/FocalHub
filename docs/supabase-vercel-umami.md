@@ -1,7 +1,8 @@
 ---
 title: Supabase&Vercel部署Umami
-date: 2024-09-17 
-category:
+date: 2023-12-17 
+category: Frontend Dev
+cover:
 ---
 
 年末，云服务器快到期了，正好赶上腾讯云年底促销，118￥/年 2核2G云服务器，就租了台。

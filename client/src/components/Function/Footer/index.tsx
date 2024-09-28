@@ -7,7 +7,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
   
   return (
     <div className='flex h-36 justify-center items-center'>
-      <div className='h-full px8 w-240 flex justify-between items-center'>
+      <div className='h-full px4 w-240 flex justify-between items-center'>
         <div className="h-full flex flex-col items-start justify-center text-3.5 font-400 text-gray-5 gap-y-1">
           <span className="flex items-center gap-x-1">
             <img src="./police.png" className="w-3" alt="GongAn" />

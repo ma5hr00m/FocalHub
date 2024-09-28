@@ -1,7 +1,8 @@
 ---
 title: Linux中Python环境/版本管理
-date: 2024-09-17
-category:
+date: 2023-11-08
+category: Python
+cover:
 ---
 
 阿菇觉得 Python 的环境/版本管理实在是依托，感觉不如 Node.js。

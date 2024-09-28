@@ -1,7 +1,8 @@
 ---
 title: 杭州小记·清河坊&伍公山&雷峰塔
-date: 2024-09-17
-category:
+date: 2023-12-11
+category: Life
+cover:
 ---
 
 > 社恐下定决心，把自己赶出了寝室……

@@ -1,7 +1,8 @@
 ---
 title: 面向新生的Linux教程
-date: 2024-09-17
-category:
+date: 2023-10-09
+category: Novice
+cover:
 ---
 
 ::: tip

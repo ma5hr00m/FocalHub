@@ -1,7 +1,8 @@
 ---
 title: 流畅地使用 async/await
-date: 2024-09-17
-category:
+date: 2024-06-03
+category: JavaScript
+cover:
 ---
 
 `async/await` 是 JavaScript 用来处理异步操作的语法。它们建立在 Promise 的基础上，提供了一种简洁直观的方式来编写和管理异步代码，现在也已经成为了 JavaScript 实际上的最佳异步编程方案。

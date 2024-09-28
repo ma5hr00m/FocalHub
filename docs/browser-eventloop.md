@@ -1,7 +1,8 @@
 ---
 title: 浏览器中的 Event Loop
-date: 2024-09-17
-category:
+date: 2024-06-05
+category: JavaScript
+cover:
 ---
 
 事件循环是 JavaScript 管理事件执行顺序的流程，具体实现与运行环境有关。本篇文章主要讲述浏览器环境中的事件循环，Node.js 中的事件循环就简单说说分哪几个阶段。

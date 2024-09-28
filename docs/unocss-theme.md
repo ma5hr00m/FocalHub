@@ -1,7 +1,8 @@
 ---
 title: 基于UnoCSS实现响应式设计&颜色主题
-date: 2024-09-17 
-category:
+date: 2023-09-17 
+category: Frontend Dev
+cover:
 ---
 
 UnoCSS 是一个 🔥火热的原子级 CSS 引擎。具体介绍不多说，本篇文章主题是实践，概念性的知识请去其官方网站了解：[UnoCSS 中文文档](https://alfred-skyblue.github.io/unocss-docs-cn/)。

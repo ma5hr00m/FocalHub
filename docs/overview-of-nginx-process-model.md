@@ -1,7 +1,8 @@
 ---
 title: Nginx进程模型概述
-date: 2024-09-17
-category:
+date: 2024-02-19
+category: Nginx
+cover:
 ---
 
 Nginx 平时一直有在用，但说实话，对其工作原理一直没有深入了解。那不如从现在开始了解，之后会慢慢更。先说说进程模型。

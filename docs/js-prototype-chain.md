@@ -1,7 +1,8 @@
 ---
 title: JavaScript原型链详解
-date: 2024-09-17
-category:
+date: 2024-02-14
+category: JavaScript
+cover:
 ---
 
 继续补档，发现这块内容其实蛮多的。后面估计还会有两篇（怎么还有两篇啊喂！），分别是 [JavaScript执行原理·补](#) 和 [JavaScript部分特性](#)，这周不知道能不能搞定。

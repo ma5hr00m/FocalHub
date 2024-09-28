@@ -1,8 +1,7 @@
 ---
 title: markdown样式测试文件
-date: 2024-09-17 '2024-08-10'
-category:
-  - 'Markdown'
+date: 2024-12-12
+category: Markdown
 author: kinoko
 cover: https://i.pinimg.com/736x/a2/98/85/a29885eb1ca507fa20147ad53f24dc3e.jpg
 tags:

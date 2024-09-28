@@ -1,7 +1,8 @@
 ---
 title: HelloWeb 致新生
-date: 2024-09-17
-category:
+date: 2024-05-21
+category: Novice
+cover:
 ---
 
 > 🚀本文档面向初次踏入 The Web World 的新生，希望为你们提供一个可供参考的学习路线。

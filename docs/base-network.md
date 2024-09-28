@@ -1,7 +1,8 @@
 ---
 title: 速通计算机网络相关概念
-date: 2024-09-17
-category:
+date: 2023-10-15
+category: Novice
+cover:
 ---
 
 ## 常见概念

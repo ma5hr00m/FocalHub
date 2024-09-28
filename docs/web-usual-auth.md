@@ -1,7 +1,8 @@
 ---
 title: 常见Web鉴权方案
-date: 2024-09-17 
-category:
+date: 2023-09-17 
+category: Web
+cover:
 ---
 
 ## 鉴权 & 持久化登陆

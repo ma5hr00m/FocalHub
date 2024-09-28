@@ -1,7 +1,8 @@
 ---
 title: 你了解Clash吗？
-date: 2024-09-17
-category:
+date: 2024-06-20
+category: Network
+cover:
 ---
 
 [什么是 Clash? | Clash 知识库](https://clash.wiki/)

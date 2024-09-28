@@ -1,7 +1,8 @@
 ---
 title: HTML的少见标签及<head>优化
-date: 2024-09-17
-category:
+date: 2023-10-24
+category: Frontend Dev
+cover:
 ---
 
 阿菇最近倾向于用原生三件套做 Web 开发，想尽可能少地依赖三方库。

@@ -1,7 +1,8 @@
 ---
 title: AliyunCTF2024 Writeup
-date: 2024-09-17
-category:
+date: 2024-04-21
+category: CTF
+cover:
 ---
 
 ## writeup.ctf

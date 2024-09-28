@@ -1,7 +1,8 @@
 ---
 title: 构建Docker镜像时遇到的问题
-date: 2024-09-17
-category:
+date: 2023-10-01
+category: Docker
+cover:
 ---
 
 HGAME-MINI2023 里的一道题目，我没法直接构建附件里给出的镜像，遇到了一点小问题。最后顺利解决了，这里略做记录。

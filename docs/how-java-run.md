@@ -1,7 +1,8 @@
 ---
 title: Java 运行原理
-date: 2024-09-17
-category:
+date: 2023-09-07
+category: Java
+cover:
 ---
 
 `Java` 代码从编写到运行，流程如下：

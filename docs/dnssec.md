@@ -1,7 +1,8 @@
 ---
 title: DNSSEC安全拓展
-date: 2024-09-17
-category:
+date: 2023-12-04
+category: Network
+cover:
 ---
 
 网络安全技术理论课程的Topic主题，倒也是很有意思。

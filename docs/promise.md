@@ -1,7 +1,8 @@
 ---
 title: Promise使用一览
-date: 2024-09-17
-category:
+date: 2024-06-17
+category: JavaScript
+cover:
 ---
 
 Promise 规范最早由 CommonJS 社区提出，后来成为 ES2015（ES6） 语言规范，到现在可以说已经成了异步编程的首选方案。

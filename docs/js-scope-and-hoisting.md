@@ -1,7 +1,8 @@
 ---
 title: JavaScript作用域与提升
-date: 2024-09-17
-category:
+date: 2024-02-16
+category: JavaScript
+cover:
 ---
 
 补档，本来想把【闭包】也一并放在本文中，但发现会有些臃肿，于是本文就只写作用域与提升。

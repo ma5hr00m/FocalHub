@@ -1,7 +1,8 @@
 ---
 title: JavaScript混淆与反混淆
-date: 2024-09-17
-category:
+date: 2024-02-12
+category: JavaScript
+cover:
 ---
 
 ## Obfuscation 混淆
